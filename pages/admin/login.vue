@@ -54,9 +54,22 @@ export default {
       }
     }
   },
+  mounted() {
+    const {message} = this.$route.query
+
+    switch (message) {
+      case 'login':
+        this.$message.info('Для начала войдите в систему')
+        break
+      case 'logout':
+        this.$message.success('Вы успешно вышли из системы')
+        break
+    }
+
+  },
   methods: {
     onSubmit() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate(async valid => {
         if (valid) {
           this.loading = true
 
@@ -66,7 +79,8 @@ export default {
               text: this.controls.password,
             }
 
-            this.$store.dispatch('auth/login', formData)
+            await this.$store.dispatch('auth/login', formData)
+            this.$router.push('/admin')
 
           } catch (e) {
             console.log(e)
