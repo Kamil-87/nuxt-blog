@@ -6,6 +6,7 @@
     @submit.native.prevent="onSubmit"
   >
     <h2>Создать пользователя</h2>
+    <p>Token github verification</p>
 
     <el-form-item label="Логин" prop="login">
       <el-input v-model.trim="controls.login"/>
